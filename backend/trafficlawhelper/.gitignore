@@ -1,7 +1,7 @@
 HELP.md
 .gradle
 build/
-application-SECRET-KEYS.properties
+src/main/resources/application-SECRET-KEYS.properties
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
