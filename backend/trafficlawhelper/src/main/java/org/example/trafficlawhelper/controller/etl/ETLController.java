@@ -1,4 +1,4 @@
-package org.example.trafficlawhelper.controller;
+package org.example.trafficlawhelper.controller.etl;
 
 import lombok.RequiredArgsConstructor;
 import org.example.trafficlawhelper.service.etl.ETLService;
