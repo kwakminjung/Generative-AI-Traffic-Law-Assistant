@@ -1,0 +1,9 @@
+spring:
+  ai:
+    vectorstore:
+      redis:
+        uri: ${REDIS_URI}
+    openai:
+      api-key: ${OPENAI_API_KEY}
+  profiles:
+    include: SECRET-KEYS
