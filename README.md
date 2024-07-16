@@ -18,3 +18,18 @@ Spring AI에서 제공하는 인터페이스를 이용하여 ETL 파이프라인
 - `PagePdfDocumentReader` : Pdf 파일을 페이지 단위로 읽습니다.
 - `TokenTextSplitter` : 파일에서 읽어들인 텍스트를 split 합니다.
 - `VectorStore` : 청크(chunk) 단위로 쪼개진 텍스트를 Redis 벡터 DB에 저장합니다.
+
+### 답변 생성
+질문을 하고 생성받은 답변을 확인하는 API의 정보입니다.
+- HTTP method : `GET`
+- URL : `/api/ai`
+- 쿼리명 : userMessage
+- Response
+```JSON
+{
+    "response": // 답변 내용
+}
+```
+
+### 참고
+- [Spring AI 공식문서](https://docs.spring.io/spring-ai/reference/index.html)
