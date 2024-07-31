@@ -2,7 +2,6 @@ package org.example.trafficlawhelper.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.PromptChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.QuestionAnswerAdvisor;
 import org.springframework.ai.chat.memory.ChatMemory;
@@ -28,7 +27,6 @@ public class ChatClientConfig {
 
         return chatClientBuilder.defaultSystem(PROMPT_STRING)
                 .defaultAdvisors(
-                        new MessageChatMemoryAdvisor(chatMemory),
                         new PromptChatMemoryAdvisor(chatMemory),
                         new QuestionAnswerAdvisor(vectorStore, SearchRequest.defaults()))
                 .build();
