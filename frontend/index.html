@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>채팅창</title>
+    <style>
+        @font-face {
+            font-family: 'MangoDdobak-B';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405-3@1.1/MangoDdobak-B.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+        }
+        body {
+            font-family: 'MangoDdobak-B';
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            height: 100vh;
+            margin: 0;
+        }
+        .car {
+            position: fixed;
+            top: 230px;
+            z-index: -1;
+        }
+        .car_img {
+            width: 70px;
+        }
+        .qa-container {
+            position: absolute;
+            top: 400px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .qa {
+            flex-direction: row;
+            transition: top 0.3s;
+            position: relative;
+            margin-top: 0px;
+        }
+        .q {
+            margin-left: 50px;
+        }
+        .a{
+            margin-right: 50px;
+            display: none;
+        }
+        .chat {
+            position: fixed;
+            bottom: 50px;
+            display: flex;
+        }
+        .chat_box {
+            width: 500px;
+            height: 55px;
+            border-radius: 10px;
+            margin: 10px;
+            font-size: 18px;
+            font-family: 'MangoDdobak-B';
+        }
+        .finish {
+            height: 55px;
+            width: 55px;
+            border-radius: 10px;
+            margin: 10px;
+            box-shadow: 3px 3px 3px grey;
+            transition-duration: 0.3s;
+        }
+        .finish_img {
+            height: 35px;
+        }
+        .finish:active {
+            margin-right: 5px;
+            margin-bottom: 5px;
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body>
+<div class="car">
+    <img src="car-icon.png" class="car_img">
+</div>
+<div class="qa-container" id="qa-container">
+    <!-- 기존 Q와 A를 담을 컨테이너 -->
+</div>
+<div class="chat">
+    <input type="text" class="chat_box" id="chat_box">
+    <button class="finish" id="finish"><img src="search-icon.png" class="finish_img"> </button>
+</div>
+
+<script>
+    document.getElementById('finish').addEventListener('click', function() {
+        var chatBox = document.getElementById('chat_box');
+        var qaContainer = document.getElementById('qa-container');
+
+        // 기존 Q와 A 요소들을 모두 위로 이동
+        var existingQAs = document.querySelectorAll('.qa');
+        existingQAs.forEach(function(qa) {
+            var currentTop = parseInt(window.getComputedStyle(qa).top, 10) || 0;
+            qa.style.top = (currentTop - 70) + 'px'; // 위로 이동
+        });
+
+        // 새로운 Q와 A 요소 생성
+        var newQA = document.createElement('div');
+        newQA.className = 'qa';
+        newQA.style.top = '0px';
+
+        var newQ = document.createElement('div');
+        newQ.className = 'q';
+        newQ.textContent = 'Q. ' + chatBox.value;
+
+        var newA = document.createElement('div');
+        newA.className = 'a';
+        newA.textContent = 'A. 답변입니다';
+        newA.style.display = 'none'; // 3초 후에 보여주기 위해 초기에는 숨김 처리
+
+        newQA.appendChild(newQ);
+        newQA.appendChild(newA);
+
+        // 새로운 Q와 A 요소를 컨테이너에 추가
+        qaContainer.appendChild(newQA);
+
+        // 3초 후에 새로운 A 요소를 표시
+        setTimeout(function() {
+            newA.style.display = 'block';
+        }, 3000);
+
+        // chat_box 리셋
+        chatBox.value = '';
+    });
+</script>
+</body>
+</html>
