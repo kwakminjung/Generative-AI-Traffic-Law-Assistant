@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>테스트</title>
@@ -53,7 +53,14 @@
             box-sizing: border-box;
             border: 1px solid gray;
         }
-        div.left_1,div.left_2,div.left_3,div.left_4,div.left_5{
+
+        #quiz-container {
+            height: 300px;
+            margin-left: 15px;
+            margin-right: 15px;
+        }
+
+        div.left_1,div.left_2,div.left_3,div.left_4,div.left_5 {
             height: 300px;
             margin-left: 15px;
             margin-right: 15px;
@@ -135,121 +142,65 @@
 </div>
 <div class="total">
     <hr>
-<div class="left">
-    <div class="left_1">
-        <br>
-    <h4>1. 다음 중 옳지 않은 것을 고르시오.</h4>
-        <p class="option" id="1_1"><strong>(1) </strong>이건 참인 문장임</p>
-        <p class="option" id="1_2"><strong>(2) </strong>이건 참인 문장임 </p>
-        <p class="option" id="1_3"><strong>(3) </strong>이건 거짓인 문장임 </p>
-        <p class="option" id="1_4"><strong>(4) </strong>이건 참인 문장임 </p>
-        <p class="option" id="1_5"><strong>(5) </strong>이건 참인 문장임 </p>
-        <hr style="color: lightgray">
-    </div>
-    <div class="left_2">
-        <h4>2. 다음 중 옳지 않은 것을 고르시오.</h4>
-        <p class="option" id="2_1"><strong>(1) </strong>이건 참인 문장임</p>
-        <p class="option" id="2_2"><strong>(2) </strong>이건 거짓인 문장임 </p>
-        <p class="option" id="2_3"><strong>(3) </strong>이건 참인 문장임 </p>
-        <p class="option" id="2_4"><strong>(4) </strong>이건 참인 문장임 </p>
-        <p class="option" id="2_5"><strong>(5) </strong>이건 참인 문장임 </p>
-        <br>
-        <hr style="color: lightgray">
-    </div>
-    <div class="left_3">
-        <h4>3. 다음 중 옳지 않은 것을 고르시오.</h4>
-        <p class="option" id="3_1"><strong>(1) </strong>이건 참인 문장임</p>
-        <p class="option" id="3_2"><strong>(2) </strong>이건 거짓인 문장임 </p>
-        <p class="option" id="3_3"><strong>(3) </strong>이건 참인 문장임 </p>
-        <p class="option" id="3_4"><strong>(4) </strong>이건 참인 문장임 </p>
-        <p class="option" id="3_5"><strong>(5) </strong>이건 참인 문장임 </p>
-        <br>
-        <hr style="color: lightgray">
-    </div>
-    <div class="left_4">
-        <h4>4. 다음 중 옳지 않은 것을 고르시오.</h4>
-        <p class="option" id="4_1"><strong>(1) </strong>이건 참인 문장임</p>
-        <p class="option" id="4_2"><strong>(2) </strong>이건 참인 문장임 </p>
-        <p class="option" id="4_3"><strong>(3) </strong>이건 참인 문장임 </p>
-        <p class="option" id="4_4"><strong>(4) </strong>이건 거짓인 문장임 </p>
-        <p class="option" id="4_5"><strong>(5) </strong>이건 참인 문장임 </p>
-        <br>
-        <hr style="color: lightgray">
-    </div>
-    <div class="left_5">
-        <h4>5. 다음 중 옳지 않은 것을 고르시오.</h4>
-        <p class="option" id="5_1"><strong>(1) </strong>이건 참인 문장임</p>
-        <p class="option" id="5_2"><strong>(2) </strong>이건 참인 문장임 </p>
-        <p class="option" id="5_3"><strong>(3) </strong>이건 참인 문장임 </p>
-        <p class="option" id="5_4"><strong>(4) </strong>이건 참인 문장임 </p>
-        <p class="option" id="5_5"><strong>(5) </strong>이건 거짓인 문장임 </p>
-        <br>
-    </div>
-</div>
-<div class="right">
-    <div class="right_1">
-        <br>
-        <h4>6. 다음 중 옳지 않은 것을 고르시오.</h4>
-        <p class="option" id="6_1"><strong>(1) </strong>이건 참인 문장임</p>
-        <p class="option" id="6_2"><strong>(2) </strong>이건 참인 문장임 </p>
-        <p class="option" id="6_3"><strong>(3) </strong>이건 거짓인 문장임 </p>
-        <p class="option" id="6_4"><strong>(4) </strong>이건 참인 문장임 </p>
-        <p class="option" id="6_5"><strong>(5) </strong>이건 참인 문장임 </p>
-        <hr style="color: lightgray">
-    </div>
-    <div class="right_2">
-        <h4>7. 다음 중 옳지 않은 것을 고르시오.</h4>
-        <p class="option" id="7_1"><strong>(1) </strong>이건 참인 문장임</p>
-        <p class="option" id="7_2"><strong>(2) </strong>이건 거짓인 문장임 </p>
-        <p class="option" id="7_3"><strong>(3) </strong>이건 참인 문장임 </p>
-        <p class="option" id="7_4"><strong>(4) </strong>이건 참인 문장임 </p>
-        <p class="option" id="7_5"><strong>(5) </strong>이건 참인 문장임 </p>
-        <br>
-        <hr style="color: lightgray">
-    </div>
-    <div class="right_3">
-        <h4>8. 다음 중 옳지 않은 것을 고르시오.</h4>
-        <p class="option" id="8_1"><strong>(1) </strong>이건 참인 문장임</p>
-        <p class="option" id="8_2"><strong>(2) </strong>이건 거짓인 문장임 </p>
-        <p class="option" id="8_3"><strong>(3) </strong>이건 참인 문장임 </p>
-        <p class="option" id="8_4"><strong>(4) </strong>이건 참인 문장임 </p>
-        <p class="option" id="8_5"><strong>(5) </strong>이건 참인 문장임 </p>
-        <br>
-        <hr style="color: lightgray">
-    </div>
-    <div class="right_4">
-        <h4>9. 다음 중 옳지 않은 것을 고르시오.</h4>
-        <p class="option" id="9_1"><strong>(1) </strong>이건 참인 문장임</p>
-        <p class="option" id="9_2"><strong>(2) </strong>이건 참인 문장임 </p>
-        <p class="option" id="9_3"><strong>(3) </strong>이건 참인 문장임 </p>
-        <p class="option" id="9_4"><strong>(4) </strong>이건 거짓인 문장임 </p>
-        <p class="option" id="9_5"><strong>(5) </strong>이건 참인 문장임 </p>
-        <br>
-        <hr style="color: lightgray">
-    </div>
-    <div class="right_5">
-        <h4>10. 다음 중 옳지 않은 것을 고르시오.</h4>
-        <p class="option" id="10_1"><strong>(1) </strong>이건 참인 문장임</p>
-        <p class="option" id="10_2"><strong>(2) </strong>이건 참인 문장임 </p>
-        <p class="option" id="10_3"><strong>(3) </strong>이건 참인 문장임 </p>
-        <p class="option" id="10_4"><strong>(4) </strong>이건 참인 문장임 </p>
-        <p class="option" id="10_5"><strong>(5) </strong>이건 거짓인 문장임 </p>
-        <br>
+    <div id="left">
+        <div id="quiz-container"></div>
     </div>
 
 </div>
-</div>
 <br>
+
 <div class="button"><button class="finish"> 확인하기 </button></div>
 <br>
-<script>
-    const nonClicks = document.querySelectorAll('.option');
-    const correctAnswers = ['1_3', '2_2', '3_2', '4_4', '5_5','6_3', '7_2', '8_2', '9_4', '10_5'];
-    let score = 0;
 
-    nonClicks.forEach(nonClick => {
-        nonClick.addEventListener('click', handleClick);
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', () => {
+        fetchQuizData();
     });
+
+    async function fetchQuizData() {
+        try {
+            const response = await fetch('/api/ai/quiz');
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const quizList = await response.json();
+            renderQuiz(quizList);
+        } catch (error) {
+            console.error('There has been a problem with your fetch operation:', error);
+        }
+    }
+
+    function renderQuiz(quizList) {
+        const quizContainer = document.getElementById('quiz-container');
+        quizContainer.innerHTML = '';
+        quizList.forEach((quiz, quizIndex) => {
+            const quizDiv = document.createElement('div');
+            quizDiv.className = 'quiz';
+            quizDiv.innerHTML = `
+                <br>
+                <h4>${quiz.question}</h4>
+                ${quiz.options.map((option, optionIndex) => `
+                    <p class="option" id="${quizIndex + 1}_${optionIndex + 1}" data-answer="${quiz.answer}"><strong>(${optionIndex + 1})</strong> ${option}</p>
+                `).join('')}
+                <hr style="color: lightgray">
+            `;
+            quizContainer.appendChild(quizDiv);
+        });
+
+        addOptionEventListeners();
+    }
+
+    function addOptionEventListeners() {
+        const nonClicks = document.querySelectorAll('.option');
+        nonClicks.forEach(nonClick => {
+            nonClick.addEventListener('click', handleClick);
+        });
+
+        const finish = document.querySelector('.finish');
+        finish.addEventListener('click', () => showScore(nonClicks));
+    }
 
     function handleClick() {
         const questionId = this.id.split('_')[0]; // 현재 선택된 질문의 ID 추출
@@ -265,11 +216,14 @@
     const finish = document.querySelector('.finish');
     finish.addEventListener('click', showScore);
 
-    function showScore() {
+    function showScore(nonClicks) {
         const name = document.getElementById('name_box').value;
+        let score = 0;
+
         nonClicks.forEach(nonClick => {
             if (nonClick.classList.contains('clicked')) {
-                if (correctAnswers.includes(nonClick.id)) {
+                const answer = nonClick.dataset.answer;
+                if (nonClick.textContent.includes(answer)) {
                     nonClick.classList.add('correct');
                     score += 10;
                 } else {
@@ -289,6 +243,7 @@
         event.target.classList.toggle('hover');
     }
 
+    /*
     finish.addEventListener('click', () => {
         finish.style.display = 'none';
         nonClicks.forEach(nonClicks => {
@@ -298,6 +253,7 @@
         });
         finish.disabled = true;
     });
+    */
 
     // const nonClicks = document.querySelectorAll('.option');
     // const correctAnswers = ['1_3', '2_2', '3_2', '4_4', '5_5','6_3', '7_2', '8_2', '9_4', '10_5'];
