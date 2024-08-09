@@ -68,7 +68,7 @@
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ text: userQuestion })
+            body: JSON.stringify({ request: userQuestion })
         })
             .then(response => response.json())
             .then(data => {
