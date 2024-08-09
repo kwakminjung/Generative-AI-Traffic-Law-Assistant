@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>테스트</title>
+    <link rel="stylesheet" href="static/ins_test.css">
+</head>
+
+<body>
+<h2>00보험사 보험률 측정 문제지</h2>
+<br>
+<div class="name"><h3> 이름 : </h3> <input type="text" id="name_box"/></div>
+<div class="final">
+    <div id="result"> </div>
+    <div id="result_2"></div>
+</div>
+<div class="total">
+    <hr>
+    <div id="left">
+        <div id="quiz-container"></div>
+    </div>
+
+</div>
+<br>
+
+<div class="button"><button class="finish"> 확인하기 </button></div>
+<br>
+
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', () => {
+        fetchQuizData();
+    });
+
+    async function fetchQuizData() {
+        try {
+            const response = await fetch('/api/ai/quiz');
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const quizList = await response.json();
+            renderQuiz(quizList);
+        } catch (error) {
+            console.error('There has been a problem with your fetch operation:', error);
+        }
+    }
+
+    function renderQuiz(quizList) {
+        const quizContainer = document.getElementById('quiz-container');
+        quizContainer.innerHTML = '';
+        quizList.forEach((quiz, quizIndex) => {
+            const quizDiv = document.createElement('div');
+            quizDiv.className = 'quiz';
+            quizDiv.innerHTML = `
+                <br>
+                <h4>${quiz.question}</h4>
+                ${quiz.options.map((option, optionIndex) => `
+                    <p class="option" id="${quizIndex + 1}_${optionIndex + 1}" data-answer="${quiz.answer}"><strong>(${optionIndex + 1})</strong> ${option}</p>
+                `).join('')}
+                <hr style="color: lightgray">
+            `;
+            quizContainer.appendChild(quizDiv);
+        });
+
+        addOptionEventListeners();
+    }
+
+    function addOptionEventListeners() {
+        const nonClicks = document.querySelectorAll('.option');
+        nonClicks.forEach(nonClick => {
+            nonClick.addEventListener('click', handleClick);
+        });
+
+        const finish = document.querySelector('.finish');
+        finish.addEventListener('click', () => showScore(nonClicks));
+    }
+
+    function handleClick() {
+        const questionId = this.id.split('_')[0]; // 현재 선택된 질문의 ID 추출
+        const options = document.querySelectorAll(`.option[id^='${questionId}_']`); // 동일 질문의 모든 선택지 가져오기
+
+        options.forEach(option => {
+            option.classList.remove('clicked'); // 동일 질문의 다른 선택지 선택 해제
+        });
+
+        this.classList.add('clicked'); // 현재 선택된 선택지 선택
+    }
+
+    const finish = document.querySelector('.finish');
+    finish.addEventListener('click', showScore);
+
+    function showScore(nonClicks) {
+        const name = document.getElementById('name_box').value;
+        let score = 0;
+
+        nonClicks.forEach(nonClick => {
+            if (nonClick.classList.contains('clicked')) {
+                const answer = nonClick.dataset.answer;
+                if (nonClick.textContent.includes(answer)) {
+                    nonClick.classList.add('correct');
+                    score += 10;
+                } else {
+                    nonClick.classList.add('incorrect');
+                }
+            }
+        });
+        alert(`${name}님의 점수는 ${score}점 입니다.`);
+        document.getElementById('result').innerText = `총점 : ${score}`;
+        const percentage = 100 - score;
+        const sum = percentage / 4 + 33;
+
+        document.getElementById('result_2').innerText = `${name}님의 예상 인상 보험률은 ${sum}% 입니다.`;
+    }
+
+    function handleHover(event) {
+        event.target.classList.toggle('hover');
+    }
+
+    /*
+    finish.addEventListener('click', () => {
+        finish.style.display = 'none';
+        nonClicks.forEach(nonClicks => {
+            nonClicks.removeEventListener('click', handleClick);
+            nonClicks.removeEventListener('mouseenter', handleHover);
+            nonClicks.removeEventListener('mouseleave', handleHover);
+        });
+        finish.disabled = true;
+    });
+    */
+
+    // const nonClicks = document.querySelectorAll('.option');
+    // const correctAnswers = ['1_3', '2_2', '3_2', '4_4', '5_5','6_3', '7_2', '8_2', '9_4', '10_5'];
+    // let score = 0;
+    // const name = document.getElementById('name_box').value;
+    //
+    // nonClicks.forEach(nonClick => {
+    //     nonClick.addEventListener('click', handleClick);
+    // });
+    //
+    // function handleClick() {
+    //     if (this.classList.contains('clicked')) {
+    //         this.classList.remove('clicked');
+    //         this.removeEventListener('click', handleClick);
+    //     } else {
+    //         this.classList.add('clicked');
+    //     }
+    // }
+    //
+    // const finish = document.querySelector('.finish');
+    // finish.addEventListener('click', showScore);
+    //
+    // function showScore() {
+    //     const name = document.getElementById('name_box').value;
+    //     nonClicks.forEach(nonClick => {
+    //         if (nonClick.classList.contains('clicked')) {
+    //             if (correctAnswers.includes(nonClick.id)) {
+    //                 nonClick.classList.add('correct');
+    //                 score+=10;
+    //             } else {
+    //                 nonClick.classList.add('incorrect');
+    //             }
+    //         }
+    //     });
+    //     alert(`${name}님의 점수는 ${score}점 입니다.`);
+    //     document.getElementById('result').innerText=score;
+    //     const percentage = 100 - score;
+    //     const sum = percentage*3000.5+50000;
+    //
+    //     document.getElementById('result_2').innerText = `${name}님의 사고 가능성은 ${percentage}% 입니다.\n예상 보험료는 ${sum}원 입니다.`;
+    //
+    // }
+    // function handleHover(event) {
+    //     // 옵션 요소 hover 처리 로직
+    //     event.target.classList.toggle('hover');
+    // }
+    //
+    // finish.addEventListener('click', () => {
+    //     finish.style.display = 'none';
+    //     nonClicks.forEach(nonClicks => {
+    //         nonClicks.removeEventListener('click', handleClick);
+    //         nonClicks.removeEventListener('mouseenter', handleHover);
+    //         nonClicks.removeEventListener('mouseleave', handleHover);
+    //     });
+    //     finish.disabled = true;
+    // });
+</script>
+</body>
+</html>
